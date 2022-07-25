@@ -77,6 +77,9 @@ public class MatchService {
 	public synchronized void signup(int matchId, Player player) {
 		Optional<MatchWithPlayers> matchById = matchRepo.getMatchById(matchId);
 		if (matchById.isPresent()) {
+			if (!matchById.get().getMatchState().equals(SIGNUPS)) {
+				throw new ResponseStatusException(HttpStatus.CONFLICT, "Can not sign up to an in-progress match, only during signups");
+			}
 			matchRepo.signup(matchById.get(), player);
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
