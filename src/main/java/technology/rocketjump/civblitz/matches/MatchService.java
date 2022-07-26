@@ -236,7 +236,11 @@ public class MatchService {
 
 		if (auditBuilder.length() > 0) {
 			auditBuilder.append("For match ").append(match.getMatchName());
-			auditLogger.record(currentPlayer, auditBuilder.toString(), match);
+			String message = auditBuilder.toString();
+			if (message.length() >= 300) {
+				message = message.substring(0, 300);
+			}
+			auditLogger.record(currentPlayer, message, match);
 		}
 	}
 
