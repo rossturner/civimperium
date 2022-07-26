@@ -22,6 +22,7 @@ public class ModHeaderGenerator {
 		String description = "This mod consists of a selection of new civs to support the Civ Blitz match " + matchName;
 
 		String modName = StringUtils.replaceAll(matchName, " ", "_");
+		modName = StringUtils.replaceAll(modName, "/", "_");
 		return new ModHeader(modName, description, UUID.nameUUIDFromBytes(modName.getBytes()));
 	}
 
