@@ -4,6 +4,7 @@ public enum StartEra implements Weightable {
 
 	Ancient(1f, "", 100),
 	Medieval(1f, "", 80);
+	// TODO when un-commenting, also un-comment ObjectiveDefinitionParser line 128
 //	Industrial(1f, "No Great Prophets are available with an Industrial start era.", 80);
 
 	private final float weighting;
