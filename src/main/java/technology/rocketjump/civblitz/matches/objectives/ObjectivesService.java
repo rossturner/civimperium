@@ -25,6 +25,7 @@ import static technology.rocketjump.civblitz.matches.objectives.ObjectiveDefinit
 public class ObjectivesService {
 
 	private static final long MINIMUM_MILITARY_PUBLIC_OBJECTIVES = 2;
+	private static final long MAXIMUM_MILITARY_PUBLIC_OBJECTIVES = 3;
 	private static final int NUM_GUILDS_PER_MATCH = 3;
 	private final AllObjectivesService allObjectivesService;
 	private final ObjectivesRepo objectivesRepo;
@@ -115,7 +116,7 @@ public class ObjectivesService {
 		pickObjective(3, selectedObjectives, allPublicObjectives, startEra);
 
 		long numMilitaryObjectives = selectedObjectives.stream().filter(o -> o.military).count();
-		if (numMilitaryObjectives < MINIMUM_MILITARY_PUBLIC_OBJECTIVES) {
+		if (numMilitaryObjectives < MINIMUM_MILITARY_PUBLIC_OBJECTIVES || numMilitaryObjectives > MAXIMUM_MILITARY_PUBLIC_OBJECTIVES) {
 			// just select again until we get it right
 			return pickPublicObjectives(allPublicObjectives, startEra);
 		} else {
