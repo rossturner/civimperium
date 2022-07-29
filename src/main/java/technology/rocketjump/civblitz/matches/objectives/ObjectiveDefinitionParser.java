@@ -34,7 +34,7 @@ public class ObjectiveDefinitionParser {
 
 	public List<ObjectiveDefinition> readFromGoogleSheet() throws JsonProcessingException {
 		String requestUrl = "https://sheets.googleapis.com/v4/spreadsheets/1PNS3od_8Kh3LrH48WLQveBhVQ7CvDSwmOlwErP1Q8SM/" +
-				"values/A1:L300?key="+googleApiKey;
+				"values/A1:L999?key="+googleApiKey;
 
 		ResponseEntity<String> response = restTemplate.getForEntity(requestUrl, String.class);
 		if (response.getStatusCode().is2xxSuccessful()) {
