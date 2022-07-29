@@ -125,7 +125,7 @@ public class ObjectiveDefinitionParser {
 		if (!industrialStars.isEmpty()) {
 			try {
 				Integer starsNum = Integer.parseInt(industrialStars);
-//				objectiveDefinition.setStars(StartEra.Industrial, starsNum);
+				objectiveDefinition.setStars(StartEra.Industrial, starsNum);
 			} catch (NumberFormatException e) {
 				System.err.println("Can not parse " + industrialStars + " to int from objective " + name);
 				return Optional.empty();
