@@ -1,4 +1,4 @@
-import {Button, Card, Container, Header, Segment, Select} from "semantic-ui-react";
+import {Button, Card, Container, Header, Popup, Segment, Select} from "semantic-ui-react";
 import React, {useState} from "react";
 import CivCard from "./cards/CivCard";
 import {MAIN_CATEGORIES} from "./cards/CardStore";
@@ -64,9 +64,12 @@ const ConstructedCiv = ({index, cards, editable, onCardClick, onConfirmClick, al
                 }
 
                 {(!editable || (alwaysEditing && hasSelectedNecessaryCards)) &&
-                <Button as='a' href={downloadLink} disabled={!selectedBias}>
-                    Download mod
-                </Button>
+                    <Popup
+                        content="Unzip this to a directory, then place that directory inside Documents/My Games/Sid Meier's Civilization VI/Mods"
+                        trigger={<Button as='a' href={downloadLink} disabled={!selectedBias}>
+                            Download mod
+                        </Button>}
+                    />
                 }
             </Container>
         </Segment>
