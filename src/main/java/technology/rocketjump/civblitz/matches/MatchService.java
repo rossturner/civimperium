@@ -14,10 +14,7 @@ import technology.rocketjump.civblitz.matches.objectives.ObjectivesService;
 import technology.rocketjump.civblitz.model.*;
 import technology.rocketjump.civblitz.players.PlayerRepo;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 import static technology.rocketjump.civblitz.matches.MatchState.*;
 import static technology.rocketjump.civblitz.model.CardCategory.mainCategories;
@@ -159,7 +156,7 @@ public class MatchService {
 		for (MatchSignupWithPlayer signup : matchWithPlayers.signups) {
 			signup = uncommitPlayer(matchWithPlayers, signup.getPlayer());
 
-			for (Card selectedCard : signup.getSelectedCards()) {
+			for (Card selectedCard : new ArrayList<>(signup.getSelectedCards())) {
 				removeCardFromMatchDeck(matchWithPlayers, signup.getPlayer(), selectedCard.getIdentifier());
 			}
 
