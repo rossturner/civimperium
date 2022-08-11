@@ -24,8 +24,8 @@ import static technology.rocketjump.civblitz.matches.objectives.ObjectiveDefinit
 @Service
 public class ObjectivesService {
 
-	private static final long MINIMUM_MILITARY_PUBLIC_OBJECTIVES = 2;
-	private static final long MAXIMUM_MILITARY_PUBLIC_OBJECTIVES = 3;
+	private static final long MINIMUM_MILITARY_PUBLIC_OBJECTIVES = 1;
+	private static final long MAXIMUM_MILITARY_PUBLIC_OBJECTIVES = 2;
 	private static final int NUM_GUILDS_PER_MATCH = 3;
 	private final AllObjectivesService allObjectivesService;
 	private final ObjectivesRepo objectivesRepo;
