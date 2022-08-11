@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import technology.rocketjump.civblitz.mapgen.MapSettings;
 import technology.rocketjump.civblitz.mapgen.MapSettingsGenerator;
+import technology.rocketjump.civblitz.matches.objectives.ObjectiveDefinition;
+import technology.rocketjump.civblitz.matches.objectives.ObjectiveDefinitionRepo;
 import technology.rocketjump.civblitz.model.Card;
 import technology.rocketjump.civblitz.model.SourceDataRepo;
 import technology.rocketjump.civblitz.modgenerator.CompleteModGenerator;
@@ -26,15 +28,18 @@ public class ExampleController {
 	private final ModHeaderGenerator modHeaderGenerator;
 	private final MapSettingsGenerator mapSettingsGenerator;
 	private final DSLContext create;
+	private final ObjectiveDefinitionRepo objectiveDefinitionRepo;
 
 	@Autowired
 	public ExampleController(SourceDataRepo sourceDataRepo, CompleteModGenerator completeModGenerator,
-							 ModHeaderGenerator modHeaderGenerator, MapSettingsGenerator mapSettingsGenerator, DSLContext create) {
+							 ModHeaderGenerator modHeaderGenerator, MapSettingsGenerator mapSettingsGenerator,
+							 DSLContext create, ObjectiveDefinitionRepo objectiveDefinitionRepo) {
 		this.sourceDataRepo = sourceDataRepo;
 		this.completeModGenerator = completeModGenerator;
 		this.modHeaderGenerator = modHeaderGenerator;
 		this.mapSettingsGenerator = mapSettingsGenerator;
 		this.create = create;
+		this.objectiveDefinitionRepo = objectiveDefinitionRepo;
 	}
 
 	@GetMapping("/cards")
@@ -63,6 +68,11 @@ public class ExampleController {
 	public Principal getUser(Principal principal) {
 		// Go to http://localhost:8080/oauth2/authorization/discord to login, redirected to redirect URI
 		return principal;
+	}
+
+	@GetMapping("/objectives")
+	public List<ObjectiveDefinition> getObjectives() {
+		return objectiveDefinitionRepo.getAll();
 	}
 
 	@GetMapping(value = "/mod", produces = "application/zip")

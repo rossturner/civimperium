@@ -51,4 +51,8 @@ public class ObjectiveDefinitionRepo {
 	public Optional<ObjectiveDefinition> getById(String objectiveId) {
 		return Optional.ofNullable(byObjectiveId.get(objectiveId));
 	}
+
+	public List<ObjectiveDefinition> getAll() {
+		return new ArrayList<>(byObjectiveId.values());
+	}
 }
