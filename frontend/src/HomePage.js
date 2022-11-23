@@ -1,7 +1,7 @@
-import {Button, Container, Header, Icon} from "semantic-ui-react";
+import {Button, Container, Header, Icon, Image} from "semantic-ui-react";
 
 
-const HomePage = () => {
+const HomePage = ({multiplayerEnabled}) => {
 
     return (
         <Container>
@@ -9,28 +9,51 @@ const HomePage = () => {
                 <Header as='h2'>Welcome to Civ Blitz!</Header>
             </Container>
             <Container text>
+                {multiplayerEnabled &&
+                    <p>
+                        This site is the home of Civ Blitz, which is an exiciting new multiplayer game mode for
+                        Civilization VI where players own a collection of cards representing traits from civilizations
+                        in the base game, e.g. civ abilities, leader abilities, unique units and infrastructure. Players
+                        sign up to a multiplayer match, build a unique civ with a combination of 4 of these cards, and
+                        play
+                        out the match using their custom civs. Blitz matches have objective-based victory conditions
+                        (i.e.
+                        the first player to claim a number of public and secret objectives wins the game) and are
+                        played at "quick" speed, to create an interesting short format game (lasting 80 or 100 turns).
+                        The cards used are removed from the player's collection,
+                        they gain a new set of 4 cards to replace them, and doing well in the match rewards the player
+                        with
+                        points which can be spent to further grow their collection of cards.
+                    </p>
+                }
+                {!multiplayerEnabled &&
+                    <p>
+                        This offline version of Civ Blitz allows you to build custom civs by mixing and matching abilities
+                        from the base game. Head on over to <a href='/modtester'>Mod Tester</a> to get started.
+                    </p>
+                }
                 <p>
-                    This site is the home of Civ Blitz, which is an exiciting new multiplayer game mode for
-                    Civilization VI where players own a collection of cards representing traits from civilizations
-                    in the base game, e.g. civ abilities, leader abilities, unique units and infrastructure. Players
-                    sign up to a multiplayer match, build a unique civ with a combination of 4 of these cards, and play
-                    out the match using their custom civs. Blitz matches have objective-based victory conditions (i.e.
-                    the first player to claim a number of public and secret objectives wins the game) and are
-                    played at "quick" speed, to create an interesting short format game (lasting 80 or 100 turns).
-                    The cards used are removed from the player's collection,
-                    they gain a new set of 4 cards to replace them, and doing well in the match rewards the player with
-                    points which can be spent to further grow their collection of cards.
+                    <b>After downloading the zip file, extract it to a directory, then place the resulting directory in
+                        Documents\My Games\Sid Meier's Civilization VI\Mods as shown
+                    </b>
+                </p>
+                <p>
+                    <Image src='/images/mod-installation-example.png' />
                 </p>
                 <p>
                     Civ Blitz is a creation of <a href='https://discord.gg/Bq6p7yJHKd' target='_blank' rel="noreferrer">the Disczord community</a>,
                     home of Twitch streamer <a href='https://www.twitch.tv/harringzord' target='_blank' rel="noreferrer">Harringzord</a>.
                 </p>
-                <p align='center'>
-                    <Button size='large' primary as='a' href='https://docs.google.com/document/d/1hQVetUjOEpe80q44MxvCVJGFkCYiWrA8Gfh05yCYyZM/edit?usp=sharing' target='_blank'>
-                        <Icon name='file' />
-                        Civ Blitz Multiplayer Rules
-                    </Button>
-                </p>
+                {multiplayerEnabled &&
+                    <p align='center'>
+                        <Button size='large' primary as='a'
+                                href='https://docs.google.com/document/d/1hQVetUjOEpe80q44MxvCVJGFkCYiWrA8Gfh05yCYyZM/edit?usp=sharing'
+                                target='_blank'>
+                            <Icon name='file'/>
+                            Civ Blitz Multiplayer Rules
+                        </Button>
+                    </p>
+                }
                 <p align='center'>
                     <Button size='large' as='a' href='https://discord.gg/Bq6p7yJHKd' target='_blank'>
                         <Icon name='discord' />

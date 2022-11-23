@@ -2,7 +2,7 @@ import {Image, Menu} from "semantic-ui-react";
 import React from "react";
 import {Link} from "react-router-dom";
 
-const TopLevelMenu = ({loggedInPlayer}) => {
+const TopLevelMenu = ({loggedInPlayer, multiplayerEnabled}) => {
 
     const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     document.cookie = 'state='+randomString;
@@ -21,21 +21,21 @@ const TopLevelMenu = ({loggedInPlayer}) => {
                 </Link>
             </Menu.Item>
 
-            {!loggedInPlayer &&
+            {!loggedInPlayer && multiplayerEnabled &&
                 <Menu.Item as='a' header href={discordLoginUrl}>
                     <Image src='/images/Discord-Logo-Color.png' height={20}/>
                     &nbsp;
                     Login
                 </Menu.Item>
             }
-            {loggedInPlayer &&
+            {loggedInPlayer && multiplayerEnabled &&
                 <Menu.Item header>
                     <Link to='/collection'>
                         {loggedInPlayer.discordUsername}'s Collection
                     </Link>
                 </Menu.Item>
             }
-            {loggedInPlayer &&
+            {loggedInPlayer && multiplayerEnabled &&
             <Menu.Item header>
                 <Link to='/matches'>
                     Matches
@@ -43,11 +43,13 @@ const TopLevelMenu = ({loggedInPlayer}) => {
             </Menu.Item>
             }
 
+            {multiplayerEnabled &&
             <Menu.Item header>
                 <Link to='/leaderboard'>
                     Leaderboard
                 </Link>
             </Menu.Item>
+            }
 
             <Menu.Item header>
                 <Link to='/modtester'>

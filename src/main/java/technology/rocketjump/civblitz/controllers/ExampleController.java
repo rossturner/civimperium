@@ -1,7 +1,7 @@
 package technology.rocketjump.civblitz.controllers;
 
-import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import technology.rocketjump.civblitz.mapgen.MapSettings;
 import technology.rocketjump.civblitz.mapgen.MapSettingsGenerator;
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/example")
@@ -27,18 +28,18 @@ public class ExampleController {
 	private final CompleteModGenerator completeModGenerator;
 	private final ModHeaderGenerator modHeaderGenerator;
 	private final MapSettingsGenerator mapSettingsGenerator;
-	private final DSLContext create;
 	private final ObjectiveDefinitionRepo objectiveDefinitionRepo;
+	@Value("${multiplayer-flag}")
+	private boolean multiplayerFlag;
 
 	@Autowired
 	public ExampleController(SourceDataRepo sourceDataRepo, CompleteModGenerator completeModGenerator,
 							 ModHeaderGenerator modHeaderGenerator, MapSettingsGenerator mapSettingsGenerator,
-							 DSLContext create, ObjectiveDefinitionRepo objectiveDefinitionRepo) {
+							 ObjectiveDefinitionRepo objectiveDefinitionRepo) {
 		this.sourceDataRepo = sourceDataRepo;
 		this.completeModGenerator = completeModGenerator;
 		this.modHeaderGenerator = modHeaderGenerator;
 		this.mapSettingsGenerator = mapSettingsGenerator;
-		this.create = create;
 		this.objectiveDefinitionRepo = objectiveDefinitionRepo;
 	}
 
@@ -92,6 +93,13 @@ public class ExampleController {
 		response.addHeader("Content-Disposition", "attachment; filename=\"CivBlitz_"+modName+".zip\"");
 
 		return completeModGenerator.generateMod(civInfo);
+	}
+
+	@GetMapping("/features")
+	public Map<String, Boolean> getFeatureFlags() {
+		return Map.of(
+				"multiplayer",  multiplayerFlag
+		);
 	}
 
 }

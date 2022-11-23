@@ -3,6 +3,7 @@ package technology.rocketjump.civblitz.io;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import technology.rocketjump.civblitz.cards.ModifierCardsParser;
 import technology.rocketjump.civblitz.matches.guilds.GuildDefinitionParser;
@@ -16,6 +17,9 @@ import java.io.IOException;
 
 @Component
 public class SourceDataParser {
+
+	@Value("${multiplayer-flag}")
+	private boolean multiplayerFlag;
 
 	@Autowired
 	public SourceDataParser(LeaderTraitsParser leaderTraitsParser, CivTraitsParser civTraitsParser,
@@ -48,8 +52,10 @@ public class SourceDataParser {
 		dlcParser.parse(civDlcContent, leaderDlcContent);
 		modifiersParser.parse(traitModifiersContent);
 
-		objectiveDefinitionParser.readFromGoogleSheet();
-		guildDefinitionParser.readFromGoogleSheet();
+		if (multiplayerFlag) {
+			objectiveDefinitionParser.readFromGoogleSheet();
+			guildDefinitionParser.readFromGoogleSheet();
+		}
 
 		sourceDataRepo.removeGrantedCards();
 		System.out.println("Base cards parsed: " + sourceDataRepo.getAll().size());
@@ -57,7 +63,9 @@ public class SourceDataParser {
 		verifyIconAtlasEntries(sourceDataRepo);
 		verifyAllCivRecordEntries(sourceDataRepo);
 
-		modifierCardsParser.readFromGoogleSheet();
+		if (multiplayerFlag) {
+			modifierCardsParser.readFromGoogleSheet();
+		}
 
 		System.out.println("All cards parsed: " + sourceDataRepo.getAll().size());
 	}

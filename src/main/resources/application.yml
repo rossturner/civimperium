@@ -1,3 +1,5 @@
+multiplayer-flag: false
+
 spring:
   datasource:
     url: jdbc:h2:file:./persistent_db/imperium_db;DATABASE_TO_UPPER=false;AUTO_SERVER=TRUE

@@ -22,6 +22,7 @@ const App = ({history}) => {
 
     const [loading, setLoading] = useState(true);
     const [loggedInPlayer, setLoggedInPlayer] = useState();
+    const [multiplayerEnabled, setMultiplayerEnabled] = useState(false);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -49,7 +50,15 @@ const App = ({history}) => {
             .then((response) => {
                 if (!CardStore.initialised) {
                     CardStore.addCards(response.data);
-                    setLoading(false);
+                    axios.get("/example/features")
+                        .then((response) => {
+                            setMultiplayerEnabled(response.multiplayer);
+                            setLoading(false);
+                        })
+                        .catch((error) => {
+                            console.error('Error loading feature flags', error);
+                        });
+
                 }
             })
             .catch((error) => {
@@ -69,11 +78,11 @@ const App = ({history}) => {
     }
     return (
         <div>
-            <TopLevelMenu loggedInPlayer={loggedInPlayer}/>
+            <TopLevelMenu loggedInPlayer={loggedInPlayer} multiplayerEnabled={multiplayerEnabled}/>
 
             <Switch>
                 <Route exact path="/">
-                    <HomePage />
+                    <HomePage multiplayerEnabled={multiplayerEnabled} />
                 </Route>
                 <Route exact path="/collection">
                     <PlayerCollection loggedInPlayer={loggedInPlayer}/>
