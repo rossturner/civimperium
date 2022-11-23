@@ -58,6 +58,7 @@ public class ModInfoGenerator extends BlitzFileGenerator {
 				"    <Mod id=\"A3F42CD4-6C3E-4F5A-BC81-BE29E0C0B87C\" title=\"LOC_KUBLAIKHAN_VIETNAM_MOD_TITLE\" />\n" +
 				"    <Mod id=\"FFDF4E79-DEE2-47BB-919B-F5739106627A\" title=\"LOC_PORTUGAL_MOD_TITLE\" />\n" +
 				"    <Mod id=\"113D9459-0A3B-4FCB-A49C-483F40303575\" title=\"LOC_TEDDY_ROOSEVELT_MOD_TITLE\" />\n" +
+				"    <Mod id=\"7A66DB58-B354-4061-8C80-95B638DD6F6C\" title=\"LOC_GREAT_NEGOTIATORS_MOD_TITLE\" />\n" +
 				"  </References>\n" +
 				"  <FrontEndActions>\n" +
 				"    <UpdateDatabase id=\"Update_DB_Frontend\">\n" +
