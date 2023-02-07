@@ -52,7 +52,7 @@ const App = ({history}) => {
                     CardStore.addCards(response.data);
                     axios.get("/example/features")
                         .then((response) => {
-                            setMultiplayerEnabled(response.multiplayer);
+                            setMultiplayerEnabled(response.data.multiplayer);
                             setLoading(false);
                         })
                         .catch((error) => {
